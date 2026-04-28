@@ -9,7 +9,7 @@
 - **WireGuard DNAT, 0 FORWARD packets**: Asymmetric routing on CGNAT → Switch from MASQUERADE to SNAT in iptables POSTROUTING → Prevents by ensuring reply traffic flows correctly
 - **Docker container unreachable from LAN**: `--network host` + iptables interference → Route through nginx reverse proxy on localhost → Always verify with `ss -tlnp` that container is actually listening before debugging nginx
 - **Certbot fails**: Usually port 80 occupied or DNS not pointing to correct server → Check `nginx -t`, `curl -4 ifconfig.me` on target, `dig` for DNS → Kill any process on port 80, verify DNS first
-- **Ollama crash after firewall change**: UFW rules can block Ollama's localhost port → Always whitelist 11434/tcp from localhost → NEVER modify networking without checking cascading effects (Apr 10 incident)
+- **Ollama crash after firewall change**: UFW rules can block Ollama's localhost port → Always whitelist 11434/tcp from localhost → NEVER modify networking without checking cascading effects (from experience)
 
 ## Optimization Tips
 - **Debugging network routing**: `mtr` > `traceroute` for pinpointing where packets drop → MTR shows ongoing stats, traceroute is one-shot → `mtr -rwzbc 50 <target>` for comprehensive path analysis

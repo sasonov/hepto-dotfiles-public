@@ -15,7 +15,7 @@ Based on ACON (Adaptive COntext Navigation, arXiv:2510.00615): Compression guide
 
 ## The Problem
 
-Our ContextCompressor (hermes-agent/agent/context_compressor.py) uses fixed rules:
+Our ContextCompressor (your-agent/core/compressor.py) uses fixed rules:
 - Prune old tool results
 - Protect head messages (system + first exchange)
 - Protect tail by token budget
@@ -32,7 +32,7 @@ Log every compression event with:
 - What was preserved vs removed
 - Whether the task subsequently succeeded or failed
 
-Store observations in: `~/.hermes/research/compression-events.md`
+Store observations in: `~/data/compression-events.md`
 
 ### Phase 2: Failure Analysis (When We Have 5+ Failures)
 For each compression event that preceded a task failure:

@@ -18,4 +18,13 @@ shell-snapshots/
 paste-cache/
 file-history/
 downloads/
-settings.local.json
+settings.local.json*.swp
+*.swo
+*~
+.env
+.env.*
+node_modules/
+*.log
+.idea/
+.vscode/
+Thumbs.db

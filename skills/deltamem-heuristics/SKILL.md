@@ -48,7 +48,7 @@ Before adding, check: Does a similar entry already exist? If so, consider REPLAC
 
 Replace an existing entry when:
 
-- **New fact contradicts old one**: "I use Linux now" contradicts "Elias uses macOS"
+- **New fact contradicts old one**: "I use Linux now" contradicts "Alice uses macOS"
 - **Old entry is outdated**: "I use Mac" → "I switched to Linux", "Server is at X" → "Server moved to Y"
 - **More accurate version available**: "Deploy with docker-compose" → "Deploy with docker compose" (v2 syntax), "API key is ABC" → "API key is XYZ (rotated)"
 - **Same topic, better formulation**: Old entry is vague, new information allows a clearer, more actionable statement
@@ -59,7 +59,7 @@ When replacing, do NOT add a new entry alongside the old one. Delete the old one
 
 Merge two entries into one when:
 
-- **Significant overlap**: "Elias prefers English" + "No German responses" — merge to "Elias prefers English; no German responses"
+- **Significant overlap**: "Alice prefers English" + "No German responses" — merge to "Alice prefers English; no German responses"
 - **Same topic from different angles**: "Always show progress during long tasks" + "Never go silent for >30s" — merge to "Always show progress; never silent >30s"
 - **Compoundable context**: "Server A is at 10.1.1.2" + "Server B is at 10.1.1.3" — merge to "Servers: A=10.1.1.2, B=10.1.1.3"
 
@@ -71,7 +71,7 @@ Remove an entry when:
 
 - **Stale and task-specific**: Entry hasn't been referenced in 7+ days AND is about a specific task (not a user preference). Examples: "Project X uses TypeScript 4.9", "The bug in auth flow is in middleware.ts"
 - **One-time event**: Entry is about an event that won't recur. Examples: "Yesterday's outage was caused by DNS TTL", "Meeting at 3pm on Thursday"
-- **Redundant**: Entry duplicates information found in another entry. Examples: "Elias likes short responses" + "Keep responses brief"
+- **Redundant**: Entry duplicates information found in another entry. Examples: "Alice likes short responses" + "Keep responses brief"
 - **Superseded**: A newer entry makes this one irrelevant. Examples: old API key when new one is stored, old port number when new one is stored
 
 Do NOT remove:
@@ -84,21 +84,21 @@ Do NOT remove:
 Each entry should be:
 
 - **Atomic**: One piece of information per entry (makes REPLACE/MERGE/REMOVE easier)
-- **Specific**: "Elias prefers bullet points for lists" beats "Elias has formatting preferences"
+- **Specific**: "Alice prefers bullet points for lists" beats "Alice has formatting preferences"
 - **Actionable**: "Use `docker compose` (v2), not `docker-compose` (v1)" beats "Docker compose syntax changed"
 - **Concise**: Every character counts. Abbreviate where unambiguous. Drop filler words.
 
 ## Examples
 
 ### Good entries
-- "Elias prefers English; no German responses"
+- "Alice prefers English; no German responses"
 - "Server: A=10.1.1.2, B=10.1.1.3, VPS=10.1.1.1"
 - "Always show progress during multi-step tasks; never silent >30s"
 - "Never commit directly to main branch"
 - "Docker MTU=1450 (fiber UDP fragmentation fix)"
 
 ### Bad entries
-- "Elias has some preferences about language and stuff" (vague)
+- "Alice has some preferences about language and stuff" (vague)
 - "The user told me something important about servers" (not actionable)
 - "Remember to be careful with networking" (too generic)
 - "Yesterday we debugged nginx for 2 hours" (ephemeral, not reusable)
@@ -107,7 +107,7 @@ Each entry should be:
 
 - **Memory hoarding**: Don't store everything the user says. Only store what will matter in future sessions.
 - **Stale entries**: Without removal, memory degrades. Task-specific entries from weeks ago are noise. Prune aggressively.
-- **Over-merging**: Don't merge unrelated entries just because they're short. "Elias prefers English" and "Docker MTU is 1450" should stay separate — they have nothing to do with each other.
+- **Over-merging**: Don't merge unrelated entries just because they're short. "Alice prefers English" and "Docker MTU is 1450" should stay separate — they have nothing to do with each other.
 - **Premature removal**: Don't remove an entry just because it hasn't been referenced recently. Preferences and environment facts are durable.
 - **Contradiction tolerance**: Never let two contradictory entries coexist. If you notice a contradiction, resolve it immediately via REPLACE.
 - **Capacity panic**: When memory is near capacity, don't just compact everything into a single blob. Individual entries enable surgical MERGE and REMOVE. Compress by merging related entries, not by concatenating everything.

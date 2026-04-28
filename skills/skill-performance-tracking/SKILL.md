@@ -16,7 +16,7 @@ Every skill invocation should be logged with its outcome. This data is the found
 
 ## Log Format
 
-Log file: `~/.hermes/research/skill-performance.jsonl`
+Log file: `~/data/skill-performance.jsonl`
 
 One JSON line per skill invocation:
 
@@ -29,7 +29,7 @@ One JSON line per skill invocation:
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `timestamp` | ISO 8601 string | Yes | When the skill was invoked |
-| `skill` | string | Yes | Skill name (matches directory name under `~/.hermes/skills/`) |
+| `skill` | string | Yes | Skill name (matches directory name under `~/skills/`) |
 | `task` | string | Yes | Brief description of what the skill was asked to do (1-2 sentences max) |
 | `outcome` | enum | Yes | `success`, `partial`, or `fail` |
 | `iterations` | integer | Yes | Number of attempts/iterations needed (1 = first try, 5+ = struggled) |
@@ -46,7 +46,7 @@ After each skill use:
 
 1. **Determine outcome**: Was the result fully correct (success), mostly correct but needed fixes (partial), or unusable (fail)?
 2. **Count iterations**: How many attempts or correction rounds were needed?
-3. **Append to JSONL**: Write one line to `~/.hermes/research/skill-performance.jsonl`
+3. **Append to JSONL**: Write one line to `~/data/skill-performance.jsonl`
 4. **Move on**: Don't overthink the categorization. Consistency matters more than perfection.
 
 ### Example Entries
@@ -66,16 +66,16 @@ The JSONL file is a simple line-delimited log. Basic analysis:
 
 ```bash
 # Count invocations per skill
-cat ~/.hermes/research/skill-performance.jsonl | jq -r '.skill' | sort | uniq -c | sort -rn
+cat ~/data/skill-performance.jsonl | jq -r '.skill' | sort | uniq -c | sort -rn
 
 # Success rate per skill
-cat ~/.hermes/research/skill-performance.jsonl | jq -r '[.skill, .outcome] | join(" ")' | sort | uniq -c
+cat ~/data/skill-performance.jsonl | jq -r '[.skill, .outcome] | join(" ")' | sort | uniq -c
 
 # Average iterations per skill (lower is better)
-cat ~/.hermes/research/skill-performance.jsonl | jq -r '[.skill, .iterations] | join(" ")' | awk '{sum[$1]+=$2; count[$1]++} END {for (k in sum) printf "%s %.1f\n", k, sum[k]/count[k]}'
+cat ~/data/skill-performance.jsonl | jq -r '[.skill, .iterations] | join(" ")' | awk '{sum[$1]+=$2; count[$1]++} END {for (k in sum) printf "%s %.1f\n", k, sum[k]/count[k]}'
 
 # Recent failures (last 7 days)
-cat ~/.hermes/research/skill-performance.jsonl | jq -r 'select(.outcome != "success") | [.timestamp, .skill, .task] | join(" | ")'
+cat ~/data/skill-performance.jsonl | jq -r 'select(.outcome != "success") | [.timestamp, .skill, .task] | join(" | ")'
 ```
 
 ### Patterns to Look For
@@ -94,7 +94,7 @@ Every week, summarize performance:
 2. **Underperformers**: Skills with highest fail/partial rates or highest average iterations
 3. **Action items**: Which underperformers should be revised, split, or deprecated?
 
-Store weekly summaries in `~/.hermes/research/weekly-skill-reviews/` as markdown files:
+Store weekly summaries in `~/data/weekly-skill-reviews/` as markdown files:
 
 ```markdown
 # Skill Performance Review — Week of 2025-04-07
@@ -121,10 +121,10 @@ Store weekly summaries in `~/.hermes/research/weekly-skill-reviews/` as markdown
 
 This performance data is consumed by the HyperAgents Loop 3 cron job, which:
 
-1. Reads `~/.hermes/research/skill-performance.jsonl`
+1. Reads `~/data/skill-performance.jsonl`
 2. Identifies underperforming skills (high fail/partial rate, high iteration count)
 3. Automatically rewrites or evolves those skill definitions
-4. Logs the evolution in `~/.hermes/research/skill-evolution-log.jsonl`
+4. Logs the evolution in `~/data/skill-evolution-log.jsonl`
 
 The cron job should NOT run more than once per week — skills need time to accumulate meaningful performance data before evolution is warranted.
 

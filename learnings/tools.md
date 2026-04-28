@@ -2,7 +2,7 @@
 
 ## Strategy Tips
 - **Cron jobs with subagents**: Never use delegate_task in cron job prompts → It causes timeouts (600s idle limit) → Work directly with search, browser, and file tools instead
-- **Memory management**: Memory tool is capped at ~2200 chars → Save detailed findings to FILES in ~/.hermes/research/, not to memory → Memory for facts, files for data
+- **Memory management**: Memory tool is capped at ~2200 chars → Save detailed findings to FILES in local files, not to memory → Memory for facts, files for data
 - **Browser research**: `browser_console(expression="document.querySelector('article').innerText")` is 5-10x more token-efficient than browser_snapshot+scrolling → Use for text extraction, fall back to browser_vision for layout/visual content → Not all pages have `<article>` tag; try `document.querySelector('main')`, then `document.body`
 
 ## Recovery Tips

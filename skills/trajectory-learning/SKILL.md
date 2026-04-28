@@ -22,7 +22,7 @@ When a task struggles, fails, or succeeds after difficulty, this skill extracts 
 2. **Recovery tips** — How to recover from specific errors/failures  
 3. **Optimization tips** — How to do things better/faster than the default approach
 
-These tips are stored in `~/.hermes/learnings/` as markdown files, organized by category. Before starting similar tasks, relevant learnings are injected into context.
+These tips are stored in `~/learnings/` as markdown files, organized by category. Before starting similar tasks, relevant learnings are injected into context.
 
 ## When to Use
 
@@ -40,7 +40,7 @@ These tips are stored in `~/.hermes/learnings/` as markdown files, organized by 
 ## Architecture
 
 ```
-~/.hermes/learnings/
+~/learnings/
 ├── _index.md              # Topic index for quick lookup
 ├── devops.md              # Infrastructure, deployment, networking
 ├── coding.md              # Code patterns, debugging, architecture
@@ -101,7 +101,7 @@ For each difficulty level:
 - What information was missing that would have helped?
 
 ### Step 4: Write to Learnings Database
-- Append to the appropriate category file in `~/.hermes/learnings/`
+- Append to the appropriate category file in `~/learnings/`
 - Update `_index.md` with topic keywords for quick retrieval
 - Keep entries concise (1-2 lines each) — these get injected into future context
 
