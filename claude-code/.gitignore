@@ -1,0 +1,14 @@
+# Machine-specific Claude Code files — NEVER sync
+CLAUDE.md.bak
+session-env/
+sessions/
+cache/
+debug/
+telemetry/
+history.jsonl
+shell-snapshots/
+paste-cache/
+file-history/
+downloads/
+# Local settings (plugins installed)
+settings.local.json
