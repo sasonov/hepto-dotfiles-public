@@ -6,7 +6,7 @@
 
 ## Recovery Tips
 - **Context rot detection**: Watch for repeated approaches, stale variable references, hedged reasoning, or hallucinated imports → These signal context degradation → Use /compact or start fresh
-- **Agent-sudo permission issues**: Don't waste time debugging permissions → Ask your system administrator if agent-sudo fails — they can run sudo commands themselves
+- **Agent-sudo permission issues**: Don't waste time debugging permissions → Ask your system administrator if agent-sudo fails → He can run sudo commands himself
 
 ## Optimization Tips
 - **Spec-first development**: Write complete specs before coding → Catching design issues in spec review is 10x cheaper than catching them in code → Superpowers workflow enforces this

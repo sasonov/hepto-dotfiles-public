@@ -3,7 +3,7 @@
 set -euo pipefail
 
 REPO_URL="https://github.com/sasonov/hepto-dotfiles-public.git"
-REPO_DIR="${HOME}/projects/hepto-dotfiles-public"
+REPO_DIR="${HOME}/projects/hepto-dotfiles"
 CLAUDE_DIR="${HOME}/.claude"
 
 mkdir -p "$CLAUDE_DIR"
@@ -13,7 +13,7 @@ if [ -d "${REPO_DIR}/.git" ]; then
     echo "Repo exists at $REPO_DIR — pulling latest..."
     (cd "$REPO_DIR" && git pull --ff-only)
 else
-    echo "Cloning hepto-dotfiles-public..."
+    echo "Cloning hepto-dotfiles..."
     git clone "$REPO_URL" "$REPO_DIR"
 fi
 
@@ -62,33 +62,7 @@ if ! command -v repomix &>/dev/null && command -v npm &>/dev/null; then
     npm install -g repomix || echo "  npm not available; skip repomix"
 fi
 
-# 5. Optional auto-sync via LaunchAgent
-if [ "${1:-}" = "--auto-sync" ]; then
-    PLIST_PATH="$HOME/Library/LaunchAgents/com.hepto.claude-sync.plist"
-    cat > "$PLIST_PATH" <<PLIST
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.hepto.claude-sync</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/bin/bash</string>
-        <string>${REPO_DIR}/claude-code/sync.sh</string>
-    </array>
-    <key>StartInterval</key>
-    <integer>1800</integer>
-    <key>StandardOutPath</key>
-    <string>${HOME}/.claude/sync.log</string>
-    <key>StandardErrorPath</key>
-    <string>${HOME}/.claude/sync.log</string>
-</dict>
-</plist>
-PLIST
-    launchctl load "$PLIST_PATH" 2>/dev/null || true
-    echo "✅ Auto-sync LaunchAgent installed (every 30 min)"
-else
-    echo ""
-    echo "For auto-sync, re-run with: --auto-sync"
-fi
+echo ""
+echo "Install LaunchAgent for auto-sync:"
+echo '  cp "${HOME}/projects/hepto-dotfiles/claude-code/data/com.hepto.claude-sync.plist" ~/Library/LaunchAgents/'
+echo '  launchctl load ~/Library/LaunchAgents/com.hepto.claude-sync.plist'

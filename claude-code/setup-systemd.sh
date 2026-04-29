@@ -2,7 +2,7 @@
 # Install systemd user service + timer for auto-sync
 set -euo pipefail
 
-REPO_DIR="${HOME}/projects/hepto-dotfiles-public"
+REPO_DIR="${HOME}/projects/hepto-dotfiles"
 SERVICE_DIR="${HOME}/.config/systemd/user"
 
 mkdir -p "$SERVICE_DIR"

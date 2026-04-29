@@ -3,7 +3,7 @@
 
 set -euo pipefail
 
-REPO_DIR="${1:-${HOME}/projects/hepto-dotfiles-public}"
+REPO_DIR="${1:-${HOME}/projects/hepto-dotfiles}"
 LOG="${HOME}/.claude/sync.log"
 
 cd "$REPO_DIR"

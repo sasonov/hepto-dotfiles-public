@@ -5,26 +5,3 @@ __pycache__/
 .DS_Store
 _meta.json
 *.backup
-
-# Machine-specific Claude Code files — NEVER sync
-CLAUDE.md.bak
-session-env/
-sessions/
-cache/
-debug/
-telemetry/
-history.jsonl
-shell-snapshots/
-paste-cache/
-file-history/
-downloads/
-settings.local.json*.swp
-*.swo
-*~
-.env
-.env.*
-node_modules/
-*.log
-.idea/
-.vscode/
-Thumbs.db

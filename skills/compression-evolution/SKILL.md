@@ -32,7 +32,7 @@ Log every compression event with:
 - What was preserved vs removed
 - Whether the task subsequently succeeded or failed
 
-Store observations in: `~/data/compression-events.md`
+Store observations in: `local filescompression-events.md`
 
 ### Phase 2: Failure Analysis (When We Have 5+ Failures)
 For each compression event that preceded a task failure:

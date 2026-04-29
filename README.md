@@ -1,80 +1,90 @@
-# hepto-dotfiles
+# Hepto Dotfiles — Universal Coding Agent Configuration
 
-Opinionated Claude Code config — skills, commands, CLAUDE.md guidelines, and learnings. Clone it, run the setup, get a productive Claude Code environment.
+Skills, learnings, CLAUDE.md, and sync tooling for any AI coding agent (Claude Code, Codex, Cursor, OpenCode).
 
-## One-liner install
-
-**macOS / Linux / WSL / Git Bash:**
-```bash
-curl -fsSL https://raw.githubusercontent.com/sasonov/hepto-dotfiles-public/main/install.sh | bash
-```
-
-**Windows PowerShell:**
-```powershell
-irm https://raw.githubusercontent.com/sasonov/hepto-dotfiles-public/main/install.ps1 | iex
-```
-
-## What it sets up
-
-- **CLAUDE.md** — behavioral guidelines for Claude Code (simplicity-first, surgical changes, goal-driven)
-- **Skills** — 30+ skills: superpowers workflow, TDD, systematic debugging, design review, caveman output compression, and more
-- **Commands** — `/brainstorm`, `/review`, `/verify`, `/caveman`, `/write-plan`
-- **Auto-sync** (optional) — keeps your dotfiles repo in sync across machines via LaunchAgent / systemd timer / Scheduled Task
-
-## Setup scripts per platform
-
-| Script | Platform | What it does |
-|--------|----------|--------------|
-| `claude-code/setup-mac.sh` | macOS | Symlinks to `~/.claude/`, installs plugins |
-| `claude-code/setup-pc.sh` | Linux / Git Bash | Symlinks to `~/.claude/`, installs plugins |
-| `claude-code/setup-systemd.sh` | Linux (systemd) | Installs sync timer unit |
-
-Each script is idempotent — safe to re-run.
-
-## Auto-sync
-
-Off by default. Add `--auto-sync` to the install command:
+## Quick Start (Claude Code)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sasonov/hepto-dotfiles-public/main/install.sh | bash -s -- --auto-sync
+cd ~/hepto-dotfiles
+bash scripts/install.sh
 ```
 
-On Windows: `$env:HEPTO_AUTO_SYNC='1'` before running the install command.
+This symlinks:
+- `CLAUDE.md` → `~/.claude/CLAUDE.md` (global agent context)
+- `claude-code/commands/` → `~/.claude/commands/` (custom slash commands)
+- `claude-code/settings.local.json` → `~/.claude/settings.local.json` (permissions)
 
-This registers a background job that pulls + pushes changes every 30 minutes.
+After install, Claude Code will:
+1. Read `CLAUDE.md` on every session start
+2. Have `/brainstorm`, `/write-plan`, `/review`, `/verify`, `/caveman` commands
+3. Follow the Superpowers workflow: Brainstorm → Plan → Build (TDD) → Five-Axis Review → Finish
 
-## Customizing
-
-- Edit `CLAUDE.md` to change behavioral guidelines
-- Add skills under `skills/` — Claude Code picks them up automatically
-- Add commands under `claude-code/commands/`
-- Learnings go in `learnings/`
-
-## Directory layout
+## What's Here
 
 ```
-├── CLAUDE.md                    # Behavioral guidelines
-├── claude-code/
-│   ├── commands/                # Slash commands
-│   ├── setup-mac.sh            # macOS setup
-│   ├── setup-pc.sh             # Linux/Git Bash setup
-│   ├── setup-systemd.sh        # Systemd sync timer
-│   └── sync.sh                  # Pull-rebase-push sync
-├── install.sh                   # Root bootstrap (bash)
-├── install.ps1                  # Root bootstrap (PowerShell)
-├── learnings/                   # Agent learnings & tips
-└── skills/                      # 30+ Claude Code skills
-    ├── superpowers/             # Spec-first dev workflow
-    ├── software-development/    # TDD, debugging, code review
-    ├── design/                  # Logo, CIP, slides, icons
-    ├── brand/                   # Brand guideline tools
-    └── ...                      # More skill categories
+hepto-dotfiles/
+├── CLAUDE.md                    # 📍 THE key file — agent reads this first
+├── skills/                      # All custom/modified skills
+│   ├── superpowers/              # Main workflow (Phase 1-5)
+│   │   ├── SKILL.md
+│   │   └── references/           # brainstorming, TDD, debugging, etc.
+│   ├── software-development/     # Coding-specific skills
+│   │   ├── writing-plans/
+│   │   ├── requesting-code-review/
+│   │   ├── subagent-driven-development/
+│   │   ├── test-driven-development/
+│   │   ├── systematic-debugging/
+│   │   ├── caveman-output/           # Output token compression (50% savings)
+│   │   └── ...
+│   ├── compression-evolution/    # Meta/self-improvement skills
+│   ├── deltamem-heuristics/
+│   ├── trajectory-learning/
+│   └── ...
+├── learnings/                   # Trajectory learnings (injected into Hermes)
+├── claude-code/                 # Claude Code specific config
+│   ├── commands/                # /brainstorm, /write-plan, /review, /verify, /caveman
+│   ├── settings.local.json      # Permission template
+│   └── templates/               # Project-specific CLAUDE.md templates
+├── scripts/
+│   ├── install.sh               # Symlink everything into place
+│   └── sync-from-hermes.sh      # One-way sync from live ~/skills/
+└── README.md
 ```
 
-## License
+## The Workflow
 
-See individual skill directories for license info. Skills derived from open-source projects retain their original licenses.
+Every coding task follows the **Superpowers Pipeline**:
 
----
+```
+Idea → Brainstorm → Plan (vertical-sliced, phased) → Build (TDD, one phase at a time) → Five-Axis Review → Finish Branch
+```
 
-*Built with Claude Code + Hermes Agent*
+Key patterns enforced:
+- **Vertical slicing** — each task is a full-stack feature slice, not a horizontal layer
+- **TDD** — red → green → refactor, always
+- **Phase gates** — build one phase at a time, never all at once
+- **Five-axis review** — correctness, readability, architecture, security, performance
+- **No agent verifies its own work** — independent reviewer required
+
+## Syncing from Live Hermes
+
+After updating skills in `~/skills/`:
+
+```bash
+cd ~/hepto-dotfiles
+bash scripts/sync-from-hermes.sh
+git add -A && git commit -m "sync: skills and learnings from hermes"
+git push
+```
+
+## For Other Agents
+
+**Cursor:** Copy `CLAUDE.md` to project root as `.cursorrules`  
+**Codex:** Copy `CLAUDE.md` to project root as `AGENTS.md`  
+**OpenCode:** Copy `CLAUDE.md` to project root  
+
+The skills files are plain Markdown — any agent can read them.
+
+## Related Repos
+
+- **[hepto-hermes-extensions](https://github.com/sasonov/hepto-hermes-extensions)** — Hermes Agent core patches (upstream sync)
