@@ -74,7 +74,7 @@ When a user names a tool loosely (e.g., "claudemem", "cavemem", "token savior"):
 3. **Distrust viral lists** — AI-generated "top 10 tools" posts often fabricate repos, inflate star counts, or misattribute features. Verify every tool independently with `gh api repos/OWNER/REPO` or web search.
 4. **Map which agent ecosystem it belongs to** — Claude Code (plugins, MCP, hooks), Hermes (skills + tools), Cursor, or standalone CLI. Don't force-install a Claude Code plugin into a Hermes workflow.
 
-**Example from experience:** "claudemem" → searched variants → found `thedotmack/claude-mem` (real, 66K stars) and `JuliusBrussee/cavemem` (real, part of caveman ecosystem). The tool the user actually wanted was `claude-mem`, not a generic memory skill. Meanwhile "Context Mode" by zilliztech, "Claude Token Efficient" by drona23, and "Token Savior" by mibayy — all from the same viral list — do not exist as described or have fabricated stats.
+**Example from experience:** A viral "top 10 Claude plugins" list listed "Context Mode" by zilliztech, "Claude Token Efficient" by drona23, and "Token Savior" by mibayy — none of these exist as described or have fabricated stats. Always verify independently.
 
 ## Fetching GitHub Repo Files for Review
 
