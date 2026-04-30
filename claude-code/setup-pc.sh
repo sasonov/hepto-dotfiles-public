@@ -49,9 +49,6 @@ echo "✅ Symlinks created. ~/.claude now reads from ${REPO_DIR}"
 if command -v claude &>/dev/null; then
     echo ""
     echo "Installing Claude Code plugins..."
-    claude plugin marketplace add thedotmack/claude-mem 2>/dev/null || true
-    claude plugin install claude-mem@thedotmack 2>/dev/null || echo "  (claude-mem already installed)"
-
     claude plugin marketplace add anthropics/skills 2>/dev/null || true
     claude plugin install document-skills@anthropic-agent-skills 2>/dev/null || echo "  (document-skills already installed)"
 fi

@@ -79,7 +79,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 | Writing a plan | `skills/software-development/writing-plans/SKILL.md` |
 | Code review | `skills/software-development/requesting-code-review/SKILL.md` |
 || Output compression | `/caveman lite|full|ultra` or say "caveman mode" |
-| Session memory | claude-mem plugin (auto-installed) |
 
 ---
 
@@ -115,9 +114,6 @@ Installed via `claude plugin install document-skills@anthropic-agent-skills`. Th
 | Excel (.xlsx) | "Use the **xlsx** skill to..." |
 
 Also installed: **claude-api** skill for Claude SDK guidance.
-
-### claude-mem
-Session memory persistence (auto-installed). Enables cross-session recall of project decisions and context.
 
 ---
 
